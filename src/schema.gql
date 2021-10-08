@@ -2,33 +2,60 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
-  _id: String!
+input CreateHobbyInput {
   name: String!
-  email: String!
-  password: String!
 }
 
-type Query {
-  user(_id: String!): User!
-  users: [User!]!
+input CreatePersonInput {
+  hobbies: [String!]!
+  name: String!
+}
+
+type Hobby {
+  _id: String!
+  name: String!
+}
+
+input ListHobbyInput {
+  _id: String
+  name: String
+}
+
+input ListPersonInput {
+  _id: String
+  hobbies: [String!]
+  name: String
 }
 
 type Mutation {
-  createUser(data: CreateUserInput!): User!
-  updateUser(data: UpdateUserInput!, _id: String!): User!
-  deleteUser(_id: String!): Boolean!
+  createHobby(payload: CreateHobbyInput!): Hobby!
+  createPerson(payload: CreatePersonInput!): Person!
+  deleteHobby(_id: String!): Hobby!
+  deletePerson(_id: String!): Person!
+  updateHobby(payload: UpdateHobbyInput!): Hobby!
+  updatePerson(payload: UpdatePersonInput!): Person!
 }
 
-input CreateUserInput {
+type Person {
+  _id: String!
+  hobbies(populate: Boolean!): [Hobby!]!
   name: String!
-  email: String!
-  password: String!
 }
 
-input UpdateUserInput {
-  _id: String
+type Query {
+  hobbies(filters: ListHobbyInput): [Hobby!]!
+  hobby(_id: String!): Hobby!
+  person(_id: String!): Person!
+  persons(filters: ListPersonInput): [Person!]!
+}
+
+input UpdateHobbyInput {
+  _id: String!
   name: String
-  email: String
-  password: String
+}
+
+input UpdatePersonInput {
+  _id: String!
+  hobbies: [String!]
+  name: String
 }

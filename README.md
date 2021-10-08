@@ -33,13 +33,12 @@ yarn add @nestjs/graphql apollo-server-express graphql-tools graphql
 
 ```bash
 # nest
-nest g mo user
-nest g r user
-nest g s user
+nest g mo person
+nest g r person
+nest g s person
 # touch
-touch src/user/user.graphql
-touch src/user/user.entity.ts
-touch src/user/user.input.ts
+touch src/app/person/person.model.ts
+touch src/app/person/person.inputs.ts
 ```
 
 ## Mongo
