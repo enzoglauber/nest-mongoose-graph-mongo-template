@@ -9,7 +9,20 @@ input CreateHobbyInput {
 input CreatePersonInput {
   hobbies: [String!]!
   name: String!
+  properties: [String!]!
 }
+
+input CreatePropertyInput {
+  address: String
+  location: [Float!]
+  name: String!
+  person: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type Hobby {
   _id: String!
@@ -25,21 +38,45 @@ input ListPersonInput {
   _id: String
   hobbies: [String!]
   name: String
+  properties: [String!]
+}
+
+input ListPropertyInput {
+  _id: String
+  address: String
+  createdAt: DateTime
+  location: [Float!]
+  name: String
+  person: String
+  updatedAt: DateTime
 }
 
 type Mutation {
   createHobby(payload: CreateHobbyInput!): Hobby!
   createPerson(payload: CreatePersonInput!): Person!
+  createProperty(payload: CreatePropertyInput!): Property!
   deleteHobby(_id: String!): Hobby!
   deletePerson(_id: String!): Person!
+  deleteProperty(_id: String!): Property!
   updateHobby(payload: UpdateHobbyInput!): Hobby!
   updatePerson(payload: UpdatePersonInput!): Person!
+  updateProperty(payload: UpdatePropertyInput!): Property!
 }
 
 type Person {
   _id: String!
   hobbies(populate: Boolean!): [Hobby!]!
   name: String!
+  properties(populate: Boolean!): [Property!]!
+}
+
+type Property {
+  _id: String!
+  address: String!
+  createdAt: DateTime!
+  location: [Float!]!
+  name: String!
+  updatedAt: DateTime!
 }
 
 type Query {
@@ -47,6 +84,8 @@ type Query {
   hobby(_id: String!): Hobby!
   person(_id: String!): Person!
   persons(filters: ListPersonInput): [Person!]!
+  properties(filters: ListPropertyInput): [Property!]!
+  property(_id: String!): Property!
 }
 
 input UpdateHobbyInput {
@@ -58,4 +97,13 @@ input UpdatePersonInput {
   _id: String!
   hobbies: [String!]
   name: String
+  properties: [String!]
+}
+
+input UpdatePropertyInput {
+  _id: String!
+  address: String
+  location: [Float!]
+  name: String
+  person: String
 }

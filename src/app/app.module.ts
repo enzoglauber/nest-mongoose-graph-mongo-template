@@ -6,6 +6,7 @@ import GraphQL from './graphql.config';
 import { HobbyModule } from './hobby/hobby.module';
 import Mongoose from './mongoose.config';
 import { PersonModule } from './person/person.module';
+import { PropertyModule } from './property/property.module';
 
 
 @Module({
@@ -14,6 +15,7 @@ import { PersonModule } from './person/person.module';
     Mongoose,
     PersonModule,
     HobbyModule,
+    PropertyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

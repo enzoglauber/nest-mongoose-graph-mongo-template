@@ -32,13 +32,21 @@ yarn add @nestjs/graphql apollo-server-express graphql-tools graphql
 ## Scafolds
 
 ```bash
-# nest
+# person
 nest g mo person
 nest g r person
 nest g s person
-# touch
+
 touch src/app/person/person.model.ts
 touch src/app/person/person.inputs.ts
+
+# property
+nest g mo app/property
+nest g r app/property
+nest g s app/property
+
+touch src/app/property/property.model.ts
+touch src/app/property/property.inputs.ts
 ```
 
 ## Mongo
