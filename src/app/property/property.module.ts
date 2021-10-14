@@ -7,7 +7,7 @@ import { PropertyService } from './property.service';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Property.name, schema: PropertySchema }]),
+    MongooseModule.forFeature([{ name: Property.name, schema: PropertySchema }])
   ],
   providers: [PropertyService, PropertyResolver],
 })

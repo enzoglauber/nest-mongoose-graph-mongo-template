@@ -13,7 +13,7 @@ export class CreatePropertyInput {
   @Field(() => [Number], { nullable: true })
   location: number[];
 
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   person: MongooseSchema.Types.ObjectId;
 }
 

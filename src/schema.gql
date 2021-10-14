@@ -9,14 +9,13 @@ input CreateHobbyInput {
 input CreatePersonInput {
   hobbies: [String!]!
   name: String!
-  properties: [String!]!
 }
 
 input CreatePropertyInput {
   address: String
   location: [Float!]
   name: String!
-  person: String
+  person: String!
 }
 
 """
@@ -38,7 +37,6 @@ input ListPersonInput {
   _id: String
   hobbies: [String!]
   name: String
-  properties: [String!]
 }
 
 input ListPropertyInput {
@@ -67,7 +65,6 @@ type Person {
   _id: String!
   hobbies(populate: Boolean!): [Hobby!]!
   name: String!
-  properties(populate: Boolean!): [Property!]!
 }
 
 type Property {
@@ -76,6 +73,7 @@ type Property {
   createdAt: DateTime!
   location: [Float!]!
   name: String!
+  person(populate: Boolean!): Person!
   updatedAt: DateTime!
 }
 
@@ -97,7 +95,6 @@ input UpdatePersonInput {
   _id: String!
   hobbies: [String!]
   name: String
-  properties: [String!]
 }
 
 input UpdatePropertyInput {

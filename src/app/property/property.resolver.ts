@@ -1,13 +1,16 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 
+import { Person } from '../person/person.model';
 import { CreatePropertyInput, ListPropertyInput, UpdatePropertyInput } from './property.inputs';
-import { Property } from './property.model';
+import { Property, PropertyDocument } from './property.model';
 import { PropertyService } from './property.service';
 
 @Resolver(() => Property)
 export class PropertyResolver {
-  constructor(private propertyService: PropertyService) {}
+  constructor(
+    private propertyService: PropertyService
+  ) {}
 
   @Query(() => Property)
   async property(
@@ -36,5 +39,17 @@ export class PropertyResolver {
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ) {
     return this.propertyService.delete(_id);
+  }
+
+  @ResolveField()
+  async person(
+    @Parent() property: PropertyDocument,
+    @Args('populate') populate: boolean,
+  ) {
+    if (populate)
+      await property
+        .populate({ path: 'person', model: Person.name });
+
+    return property.person;
   }
 }

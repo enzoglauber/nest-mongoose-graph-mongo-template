@@ -2,15 +2,15 @@ import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/g
 import { Schema as MongooseSchema } from 'mongoose';
 
 import { Hobby } from '../hobby/hobby.model';
-import { Property } from '../property/property.model';
 import { CreatePersonInput, ListPersonInput, UpdatePersonInput } from './person.inputs';
 import { Person, PersonDocument } from './person.model';
 import { PersonService } from './person.service';
 
-
 @Resolver(() => Person)
 export class PersonResolver {
-  constructor(private personService: PersonService) {}
+  constructor(
+    private personService: PersonService
+  ) {}
 
   @Query(() => Person)
   async person(
@@ -55,16 +55,4 @@ export class PersonResolver {
     return person.hobbies;
   }
 
-
-  @ResolveField()
-  async properties(
-    @Parent() person: PersonDocument,
-    @Args('populate') populate: boolean,
-  ) {
-    if (populate)
-      await person
-        .populate({ path: 'properties', model: Property.name });
-
-    return person.properties;
-  }
 }

@@ -9,9 +9,6 @@ export class CreatePersonInput {
 
   @Field(() => [String])
   hobbies: MongooseSchema.Types.ObjectId[];
-
-  @Field(() => [String])
-  properties: MongooseSchema.Types.ObjectId[];
 }
 
 @InputType()
@@ -24,9 +21,6 @@ export class ListPersonInput {
 
   @Field(() => [String], { nullable: true })
   hobbies?: MongooseSchema.Types.ObjectId[];
-
-  @Field(() => [String], { nullable: true })
-  properties?: MongooseSchema.Types.ObjectId[];
 }
 
 @InputType()
@@ -39,7 +33,4 @@ export class UpdatePersonInput {
 
   @Field(() => [String], { nullable: true })
   hobbies?: MongooseSchema.Types.ObjectId[];
-
-  @Field(() => [String], { nullable: true })
-  properties?: MongooseSchema.Types.ObjectId[];
 }
